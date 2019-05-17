@@ -53,8 +53,6 @@ hyper==0.7.0              # via apns2
 hyperframe==3.2.0         # via h2, hyper
 idna==2.8                 # via requests
 ijson==2.3
-ipython-genutils==0.2.0   # via traitlets
-ipython==6.5.0
 jedi==0.13.3              # via ipython
 jinja2==2.10.1
 lxml==4.3.3
