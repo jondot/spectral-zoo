@@ -19,128 +19,6 @@
     "url": "https://github.com/nteract/nteract/issues"
   },
   "homepage": "https://github.com/nteract/nteract",
-  "scripts": {
-    "app:desktop": "lerna run dev --stream --scope nteract",
-    "app:jupyter-extension": "lerna run dev --stream --scope nteract-on-jupyter",
-    "app:commuter": "echo \"\n[ Commuter app moved out of monorepo. See nteract/commuter repo. ]\n\"",
-    "start": "npm run app:desktop",
-    "spawn": "lerna run spawn --scope nteract",
-    "spawn:debug": "lerna run spawn:debug --scope nteract",
-    "lint": "npm run lint:ts",
-    "lint:fix": "npm run lint:ts:fix",
-    "lint:ts": "tslint --config tslint.json --project tsconfig.base.json --force --format stylish",
-    "lint:ts:fix": "tslint --config tslint.json --project tsconfig.base.json --fix",
-    "build:all": "tsc -b",
-    "build:all:ci": "tsc -b --verbose",
-    "build": "cross-env NODE_ENV=production npm run build:packages",
-    "build:clean": "npm run build:packages -- --clean",
-    "build:apps": "lerna run build --scope nteract --scope nteract-on-jupyter --parallel --stream",
-    "build:desktop": "lerna run build --scope nteract --stream",
-    "build:desktop:watch": "lerna run build:watch --scope nteract --stream",
-    "build:packages": "tsc -b packages",
-    "build:packages:ci": "npm run build:packages -- --verbose",
-    "build:packages:watch": "npm run build:packages -- --watch",
-    "build:icon": "./scripts/make_icons.sh && cd static/icons && iconutil -c icns nteract.iconset && mv nteract.icns ../icon.icns",
-    "build:watch": "tsc -b packages --watch",
-    "check:ship": "yarn && yarn verifyBeforePublish && yarn dist:all && open applications/desktop/dist/mac",
-    "ship:desktop": "lerna run ship --scope nteract --stream",
-    "docs": "styleguidist server",
-    "docs:build": "styleguidist build",
-    "predocs:deploy": "npm run docs:build",
-    "docs:deploy": "now ./styleguide",
-    "docs:promote": "cd ./styleguide && now alias",
-    "package:docs": "typedoc --options typedoc.js packages/commutable packages/rx-jupyter packages/rx-binder packages/enchannel-zmq-backend packages/messaging packages/actions packages/selectors packages/fs-kernels packages/epics packages/types",
-    "prepackage:docs:deploy": "npm run package:docs",
-    "package:docs:deploy": "now ./nteract-packages",
-    "package:docs:promote": "cd ./nteract-packages && now alias",
-    "test": "jest --silent",
-    "test:verbose": "jest --verbose",
-    "test:unit": "npm run test",
-    "test:coverage": "npm run test -- --coverage",
-    "test:lint": "npm run lint",
-    "diagnostics": "scripts/kernelspecs-diagnostics.js",
-    "verifyBeforePublish": "npm run build:packages && npm run build:apps",
-    "prepublishOnly": "npm run build:packages",
-    "publish": "lerna run publish",
-    "prettify": "prettier --write '**/*.{ts,tsx,js,json}' '!**/{dist,lib.git,.next,package.json,build,mathjax-electron}/**'",
-    "pack": "lerna run pack --scope nteract --stream",
-    "dist": "lerna run dist --scope nteract --stream",
-    "dist:all": "lerna run dist:all --scope nteract --stream",
-    "report:all": "npm run report:jext && npm run report:desktop",
-    "report:jext": "tsc -b applications/jupyter-extension",
-    "report:desktop": "tsc -b applications/desktop",
-    "clean": "lerna clean --yes && npm run build:clean && rimraf node_modules",
-    "lint:jupyterExtension": "cd ./applications/jupyter-extension && black --config ./pyproject.toml --check ."
-  },
-  "comment:jest": [
-    "The types in our tests don't match up right yet, so we have",
-    {
-      "isolatedModules": true
-    },
-    "set in our ts-jest config. Once the test issues are fixed, we can remove",
-    "this setting. Until then, if you want to check types to see how close we",
-    "are, delete the line with `isolateModules: true` in the `ts-jest` config"
-  ],
-  "jest": {
-    "preset": "ts-jest",
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.base.json",
-        "isolatedModules": true
-      }
-    },
-    "reporters": [
-      "default",
-      "jest-junit"
-    ],
-    "testURL": "http://localhost",
-    "setupFiles": [
-      "raf/polyfill",
-      "./scripts/test-shim.ts",
-      "./scripts/test-setup.ts"
-    ],
-    "moduleNameMapper": {
-      "^@nteract/vega-embed-v2": "@nteract/vega-embed-v2",
-      "^@nteract/([^/]*)$": "<rootDir>/packages/$1/src",
-      "^(ansi-to-react|enchannel-zmq-backend|fs-observable|rx-binder|rx-jupyter)$": "<rootDir>/packages/$1/src",
-      "\\.css$": "<rootDir>/scripts/noop-module.ts"
-    },
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/scripts",
-      "/node_modules/"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "ts",
-      "tsx"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.[tj]s?(x)",
-      "**/?(*.)+(spec|test).[tj]s?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/__tests__/.*types\\.tsx?"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    }
-  },
-  "lint-staged": {
-    "*.tsx,*.ts,*.js,!*js.snap": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.json,!package.json": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "private": true,
   "devDependencies": {
     "@types/codemirror": "^0.0.73",
     "@types/d3-collection": "^1.0.7",
@@ -226,7 +104,7 @@
     "ts-node": "^8.0.0",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
-    "tslint-eslint-rules":"^5.4.0",
+    "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^4.0.0",
     "tslint-react-a11y": "^1.0.0",
     "tslint-react-perf": "^0.2.1",
@@ -243,24 +121,5 @@
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.2.1",
     "yargs": "^13.0.0"
-  },
-  "engines": {
-    "node": ">=8.12.0"
-  },
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "applications/*",
-      "applications/jupyter-extension/nteract_on_jupyter"
-    ],
-    "nohoist": [
-      "**/nteract/**"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "dependencies": {}
+  }
 }
