@@ -23,7 +23,7 @@ projects:
         project:
             name: pythons
         input:
-            - local: ../zulip
+            - local: ../zulip/libs
               name: zulip
         rules:
             roots:
