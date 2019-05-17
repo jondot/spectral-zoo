@@ -1,0 +1,34 @@
+reporter:
+    outputs:
+        console: {}
+projects:
+    all_nodes:
+        project:
+            name: nodes
+        input:
+            - local: ../github-desktop/node_modules
+              name: github-desktop
+            - local: ../nteract/node_modules
+              name: nteract
+            - local: ../vscode/node_modules
+              name: vscode
+        rules:
+            roots:
+            - rules
+            include:
+                tags:
+                - node
+                ids: []
+    all_pythons:
+        project:
+            name: pythons
+        input:
+            - local: ../zulip
+              name: zulip
+        rules:
+            roots:
+            - rules
+            include:
+                tags:
+                - python
+                ids: []
