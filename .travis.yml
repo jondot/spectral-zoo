@@ -3,6 +3,10 @@ cache: yarn
 node_js:
   - "8"
 
+before_install:
+- sudo apt-get update
+- sudo apt-get install python3 python
+
 install:
   - ./install.sh
 script: spectral
