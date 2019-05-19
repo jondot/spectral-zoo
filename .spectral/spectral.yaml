@@ -1,5 +1,6 @@
 reporter:
     outputs:
+        junit: {}
         console: {}
 projects:
     all_nodes:
