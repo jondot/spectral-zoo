@@ -5,11 +5,7 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-  test:
-    docker:
-      - image: circleci/node:latest
-    steps:
-      - checkout
+      - run: ./install.sh
       - run: ./spectral
       - store_test_results:
           path: ./junit-out/
