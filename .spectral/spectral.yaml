@@ -33,3 +33,16 @@ projects:
                 tags:
                 - python
                 ids: []
+    all_legals:
+        project:
+            name: legals
+        input:
+            - local: ../legal-docs
+              name: docs
+        rules:
+            roots:
+            - rules
+            include:
+                tags:
+                - legal
+                ids: []

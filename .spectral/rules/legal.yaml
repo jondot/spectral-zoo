@@ -1,0 +1,18 @@
+rules:
+- id: LEG0001
+  name: docx
+  finding: "(.*)"
+  subject: "(.*)"
+  description: Look for things in docx
+  recommendation_template: Look for things in docx
+  tags:
+  - legal
+  applies_to:
+  - ".*docx$"
+  severity: info
+  pattern_group:
+    aggregate: or
+    scope: text
+    patterns:
+    - pattern: legal-words.yaml
+      pattern_type: dict
