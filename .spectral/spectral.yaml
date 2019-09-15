@@ -20,6 +20,12 @@ projects:
                 tags:
                 - node
                 ids: []
+    stress_test: # this runs all default rules
+        project:
+            name: nodes
+        input:
+            - local: ../github-desktop/node_modules
+              name: github-desktop
     all_pythons:
         project:
             name: pythons
