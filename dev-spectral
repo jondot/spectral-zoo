@@ -1,0 +1,2 @@
+#!/bin/sh
+../spectral/src/target/release/spectral run
